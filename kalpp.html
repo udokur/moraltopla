@@ -11,6 +11,8 @@
       background: linear-gradient(to top right, #ffe0f0, #ffd6e6);
       font-family: 'Comic Sans MS', cursive;
       overflow: hidden;
+      height: 100vh;
+      touch-action: manipulation;
     }
 
     h1 {
@@ -22,28 +24,29 @@
     #score {
       text-align: center;
       font-size: 28px;
-      margin-bottom: 20px;
+      margin-bottom: 10px;
       color: #b30c6f;
     }
 
     .heart {
       position: absolute;
-      font-size: 72px;
+      font-size: 64px;
       cursor: pointer;
       animation: float 4s linear forwards, pulse 1s infinite;
       text-shadow: 3px 3px 8px #ff007f;
       filter: drop-shadow(0 0 10px #ff66b2);
       z-index: 10;
       user-select: none;
+      top: calc(100% - 80px); /* Başlangıç konumu alt kenara yakın */
     }
 
     @keyframes float {
       0% {
-        transform: translateY(100vh);
+        transform: translateY(0);
         opacity: 1;
       }
       100% {
-        transform: translateY(-100px);
+        transform: translateY(-110vh);
         opacity: 0;
       }
     }
@@ -59,7 +62,7 @@
 
     #message {
       text-align: center;
-      font-size: 20px;
+      font-size: 18px;
       margin-top: 10px;
       color: #6a0572;
     }
@@ -80,8 +83,9 @@
       const heart = document.createElement('div');
       heart.classList.add('heart');
       heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
-      heart.style.left = Math.random() * 90 + 'vw';
-      heart.style.top = '100vh';
+
+      // Görünür alanda rastgele bir pozisyon ayarla (maksimum %80 genişlik)
+      heart.style.left = Math.random() * 80 + 'vw';
 
       heart.addEventListener('click', () => {
         score += 1;
@@ -99,12 +103,13 @@
 
       document.body.appendChild(heart);
 
+      // 4 saniye sonra ekran dışına çıkarsa otomatik sil
       setTimeout(() => {
         heart.remove();
       }, 4000);
     }
 
-    setInterval(createHeart, 700);
+    setInterval(createHeart, 800);
   </script>
 </body>
 </html>
