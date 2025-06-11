@@ -9,7 +9,7 @@
       margin: 0;
       padding: 0;
       background: linear-gradient(to top right, #ffe0f0, #ffd6e6);
-      font-family: 'Comic Sans MS', cursive;
+      font-family: 'Arial Black', sans-serif;
       overflow: hidden;
       height: 100vh;
       touch-action: manipulation;
@@ -19,6 +19,7 @@
       text-align: center;
       color: #d63384;
       margin-top: 20px;
+      font-size: 26px;
     }
 
     #score {
@@ -26,13 +27,14 @@
       font-size: 28px;
       margin-bottom: 10px;
       color: #b30c6f;
+      font-weight: bold;
     }
 
-    .heart {
+    .bad-emoji {
       position: absolute;
       font-size: 64px;
       cursor: pointer;
-      text-shadow: 3px 3px 8px #ff007f;
+      text-shadow: 3px 3px 8px #880044;
       filter: drop-shadow(0 0 10px #ff66b2);
       z-index: 10;
       user-select: none;
@@ -40,7 +42,7 @@
       transition: transform 0.1s;
     }
 
-    .heart:active {
+    .bad-emoji:active {
       transform: scale(1.3);
     }
 
@@ -49,52 +51,57 @@
       font-size: 18px;
       margin-top: 10px;
       color: #6a0572;
+      font-weight: bold;
     }
   </style>
 </head>
 <body>
-  <h1>Ceren'in Moral Toplayıcısı 💖</h1>
+  <h1>Güzel Bebeğimin 'in Moral Toplayıcısı 😵‍💫</h1>
   <div id="score">Puan: 0</div>
-  <div id="message">Haydi Ceren, kalplere tıkla ve moral topla!</div>
+  <div id="message">Aman dikkat Bebiş ! Bunlara tıklama! 😱</div>
 
   <script>
     let score = 0;
     const scoreDisplay = document.getElementById('score');
     const message = document.getElementById('message');
-    const hearts = ['💖','💘','💝','💕','💞','💗'];
+    const badEmojis = ['💣','👻','😈','🕷️','☠️','🤡'];
 
-    function createHeart() {
-      const heart = document.createElement('div');
-      heart.classList.add('heart');
-      heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+    function createEmoji() {
+      const emoji = document.createElement('div');
+      emoji.classList.add('bad-emoji');
+      emoji.textContent = badEmojis[Math.floor(Math.random() * badEmojis.length)];
 
-      // Rastgele konum: yüzde 10-85 arasında (kenara taşmasın)
-      heart.style.left = Math.random() * 85 + 'vw';
-      heart.style.top = Math.random() * 75 + 'vh';
+      // Yukarıda yazı alanına çıkmasın diye top en az %20
+      emoji.style.left = Math.random() * 85 + 'vw';
+      emoji.style.top = (Math.random() * 60 + 20) + 'vh';
 
-      heart.addEventListener('click', () => {
-        score += 1;
+      emoji.addEventListener('click', () => {
+        score -= 1;
         scoreDisplay.textContent = 'Puan: ' + score;
-        heart.remove();
-
+        emoji.remove();
         if (score === 10) {
-          message.textContent = 'Harikasın Güzelimmm! 💫';
+          message.textContent = 'Harikasın Güzelimm! 💫';
         } else if (score === 20) {
-          message.textContent = 'Enerjin yükseliyor dunkof seni! 🌈';
+          message.textContent = 'Bebişş yükseliyor! 🌈';
         } else if (score === 30) {
-          message.textContent = 'Bebişş süper oldu! 😍';
+          message.textContent = 'Eşşeek süper oldu! 😍';
+
+        if (score <= -5) {
+          message.textContent = 'Güzelimm dikkat et! Moral düşüyor! 😢';
+        } else if (score <= -10) {
+          message.textContent = 'Ayyy çok fena sıçtınn Tekrar dene!';
         }
       });
 
-      document.body.appendChild(heart);
+      document.body.appendChild(emoji);
 
-      // 5 saniye içinde tıklanmazsa otomatik silinsin
+      // 5 saniye sonra yok olsun
       setTimeout(() => {
-        heart.remove();
-      }, 2000);
+        emoji.remove();
+      }, 1000);
     }
 
-    setInterval(createHeart, 1000);
+    setInterval(createEmoji, 1200);
   </script>
 </body>
 </html>
