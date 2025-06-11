@@ -3,13 +3,16 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Bebegim için Moral Oyunu</title>
+  <title>Bebek için Moral Oyunu</title>
+  <!-- Fredoka fontu Google Fonts'tan -->
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600&display=swap" rel="stylesheet">
+
   <style>
     body {
       margin: 0;
       padding: 0;
       background: linear-gradient(to top right, #ffe0f0, #ffd6e6);
-      font-family: 'Comic Sans MS', cursive;
+      font-family: 'Fredoka', cursive;
       overflow: hidden;
       height: 100vh;
       touch-action: manipulation;
@@ -19,17 +22,16 @@
       text-align: center;
       color: #d63384;
       margin-top: 20px;
-      font-size: 26px;
-      font-family: 'Comic Sans MS', cursive;
-      
+      font-size: 28px;
+      font-weight: 600;
     }
 
     #score {
       text-align: center;
-      font-size: 28px;
+      font-size: 30px;
       margin-bottom: 10px;
       color: #b30c6f;
-      font-weight: bold;
+      font-weight: 700;
     }
 
     .emoji {
@@ -47,8 +49,8 @@
     }
 
     .good {
-      text-shadow: 2px 2px 6px #009966;
-      filter: drop-shadow(0 0 10px #00cc99);
+      text-shadow: 2px 2px 8px #ff6699;
+      filter: drop-shadow(0 0 12px #ff66cc);
     }
 
     .bad {
@@ -58,32 +60,34 @@
 
     #message {
       text-align: center;
-      font-size: 18px;
+      font-size: 20px;
       margin-top: 10px;
       color: #6a0572;
-      font-weight: bold;
+      font-weight: 600;
     }
   </style>
 </head>
 <body>
-  <h1>Güzel bebeğimin'in Moral Toplayıcısı 🎯</h1>
+  <h1>Güzel Bebeğim'in Özel Moral Toplayıcısı </h1>
   <div id="score">Puan: 0</div>
-  <div id="message">İyilere tıkla, kötülerden kaç! 🌈</div>
+  <div id="message">İyilere tıkla, kötülerden kaç bebiss! 🌈</div>
 
   <script>
     let score = 0;
     const scoreDisplay = document.getElementById('score');
     const message = document.getElementById('message');
 
-    const goodEmojis = ['🥰','😻','💖', '💗', '💞', '💕', '💝', '💘'🍀'];
+    // Kalpli ve pozitif emojiler
+    const goodEmojis = ['💖', '💗', '💞', '💕', '💝', '💘'];
+    // Kötü emojiler aynen devam
     const badEmojis = ['👻','💣','😈','🕷️','☠️'];
 
     function createEmoji() {
       const emoji = document.createElement('div');
       emoji.classList.add('emoji');
 
-      // Rastgele iyi mi kötü mü
-      const isGood = Math.random() < 0.6; // %60 iyi, %40 kötü
+      const isGood = Math.random() < 0.6; // %60 iyi emoji
+      
       if (isGood) {
         emoji.textContent = goodEmojis[Math.floor(Math.random() * goodEmojis.length)];
         emoji.classList.add('good');
@@ -104,7 +108,6 @@
         });
       }
 
-      // Rastgele konum (yazının üstüne çıkmasın)
       emoji.style.left = Math.random() * 85 + 'vw';
       emoji.style.top = (Math.random() * 60 + 20) + 'vh';
 
@@ -117,11 +120,11 @@
 
     function updateMessage() {
       if (score >= 10) {
-        message.textContent = 'Guzelimm ışık saçıyor! 🌞';
+        message.textContent = 'Güzelimm ışık saçıyor! 🌞';
       } else if (score >= 5) {
-        message.textContent = 'Harikasın Bebişş! 💫';
+        message.textContent = 'Harikasın Bebişşş! 💫';
       } else if (score <= -5) {
-        message.textContent = 'Dikkat! Moral düşüyor 😖';
+        message.textContent = 'Dikkat! Moral düşüyor dunkof senii 😖';
       } else {
         message.textContent = 'İyilere tıkla, kötülerden kaç! 🌈';
       }
